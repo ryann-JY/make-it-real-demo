@@ -1,5 +1,6 @@
 import {
   ArrowUpRight,
+  Boxes,
   Bookmark,
   CheckCircle2,
   Clock3,
@@ -8,6 +9,7 @@ import {
   Printer,
   Sparkles,
   Star,
+  Workflow,
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -49,6 +51,7 @@ export function ProductCard({ item, featured = false }: { item: ProductIdea; fea
       <div className="card-image-wrap">
         <img src={item.image} alt={item.title} />
         <div className="card-badges">
+          <span className="asset-type-chip idea"><Sparkles size={12} /> Product idea</span>
           <span className="evidence-pill"><CheckCircle2 size={13} /> {verifiedCount} real examples</span>
         </div>
         <SaveButton light />
@@ -77,8 +80,17 @@ export function SkillCard({ item }: { item: Skill }) {
   return (
     <Link to={`/skill/${item.id}`} className="skill-card">
       <div className="skill-visual">
-        <img src={item.image} alt={item.title} />
-        <span className="skill-icon"><Sparkles size={18} /></span>
+        <div className="skill-compare">
+          <div>
+            <img src={item.inputImage} alt={`${item.title} input`} />
+            <span>Input</span>
+          </div>
+          <div>
+            <img src={item.image} alt={`${item.title} result`} />
+            <span>Result</span>
+          </div>
+        </div>
+        <span className="asset-type-chip skill"><Workflow size={12} /> Skill workflow</span>
         <SaveButton light />
       </div>
       <div className="skill-card-body">
@@ -99,11 +111,13 @@ export function MaterialCard({ item }: { item: Material }) {
     <Link to={`/material/${item.id}`} className="material-card">
       <div className="material-image">
         <img src={item.image} alt={item.title} />
+        <span className="asset-type-chip material"><Boxes size={12} /> Material + IDF</span>
         <SaveButton light />
       </div>
       <div className="material-card-body">
         <p className="card-kicker">{item.material}</p>
         <h3>{item.title}</h3>
+        <p className="material-process-line"><strong>Print path</strong>{item.prep}</p>
         <div className="material-meta">
           <span>{item.size}</span>
           <span>{item.difficulty}</span>
@@ -121,7 +135,10 @@ export function ProjectCard({ item }: { item: Project }) {
       <div className="project-image">
         <img src={item.image} alt={item.title} />
         <div className="project-overlay">
-          <StatusPill label={item.badge} />
+          <span className="project-status-stack">
+            <span className="asset-type-chip project"><Printer size={12} /> Project</span>
+            <StatusPill label={item.badge} />
+          </span>
           <SaveButton light />
         </div>
       </div>
@@ -143,6 +160,7 @@ export function CreatorCard({ item }: { item: Creator }) {
     <article className="creator-card">
       <Link to={`/creator/${item.id}`} className="creator-cover">
         <img src={item.cover} alt="" />
+        <span className="asset-type-chip creator">Creator</span>
       </Link>
       <div className="creator-card-content">
         <Link to={`/creator/${item.id}`} className="creator-identity">

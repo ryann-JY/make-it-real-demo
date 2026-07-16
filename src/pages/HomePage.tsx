@@ -139,7 +139,7 @@ export default function HomePage() {
         link="/materials"
       >
         <div className="material-grid">
-          {materials.slice(0, 4).map((item) => <MaterialCard key={item.id} item={item} />)}
+          {materials.slice(0, 8).map((item) => <MaterialCard key={item.id} item={item} />)}
         </div>
       </Section>
 
@@ -150,7 +150,7 @@ export default function HomePage() {
         link="/projects"
       >
         <div className="masonry-grid home-masonry">
-          {projects.slice(0, 8).map((item) => <ProjectCard key={item.id} item={item} />)}
+          {projects.slice(0, 24).map((item) => <ProjectCard key={item.id} item={item} />)}
         </div>
       </Section>
 
