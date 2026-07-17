@@ -2,11 +2,9 @@ import {
   ArrowRight,
   Boxes,
   ChevronRight,
-  Gift,
   Search,
-  ShoppingBag,
   Sparkles,
-  SlidersHorizontal,
+  Users,
   WandSparkles,
 } from "lucide-react";
 import { useState } from "react";
@@ -35,11 +33,8 @@ export default function HomePage() {
     <div className="home-page">
       <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow"><WandSparkles size={15} /> Ideas, proven by real makers</p>
-          <h1>Find your next product or project.</h1>
-          <p className="hero-description">
-            Decide what to make, shape it into your own version, and learn how to print it successfully on your eufyMake E1.
-          </p>
+          <p className="eyebrow"><WandSparkles size={15} /> Verified on E1 · Ready to personalize</p>
+          <h1>Find a proven print. Make it uniquely yours.</h1>
           <form className="idea-search" onSubmit={submit}>
             <Sparkles size={22} />
             <input
@@ -47,7 +42,7 @@ export default function HomePage() {
               onChange={(event) => setQuery(event.target.value)}
               placeholder="What do you want to make?"
             />
-            <button type="submit">Explore ideas <ArrowRight size={17} /></button>
+            <button type="submit">Find proven ideas <ArrowRight size={17} /></button>
           </form>
           <div className="prompt-row">
             {prompts.map((prompt) => (
@@ -58,7 +53,7 @@ export default function HomePage() {
         <div className="hero-art">
           <div className="hero-card hero-card-main">
             <img src={productIdeas[0].image} alt="" />
-            <span className="floating-label">Pet gifts that feel personal</span>
+            <span className="floating-label">A proven print, ready to personalize</span>
           </div>
           <div className="hero-card hero-card-small top">
             <img src={productIdeas[2].image} alt="" />
@@ -67,7 +62,7 @@ export default function HomePage() {
             <img src={productIdeas[3].image} alt="" />
           </div>
           <div className="hero-proof">
-            <span><strong>2.1K</strong> real prints</span>
+            <span><strong>2.1K</strong> verified prints</span>
             <span className="proof-avatars">
               {creators.slice(0, 3).map((creator) => <img key={creator.id} src={creator.avatar} alt="" />)}
             </span>
@@ -76,32 +71,31 @@ export default function HomePage() {
       </section>
 
       <section className="intent-strip">
-        <button onClick={() => navigate("/ideas?mode=sell")}>
-          <span className="intent-icon sell"><ShoppingBag size={23} /></span>
-          <span><strong>Find a product worth testing</strong><small>Opportunity clues, estimates, and real examples</small></span>
+        <button onClick={() => navigate("/ideas")}>
+          <span className="intent-icon sell"><Sparkles size={23} /></span>
+          <span><strong>Explore Product Ideas</strong><small>Sellable directions and personalizable inspiration</small></span>
           <ChevronRight size={18} />
         </button>
-        <button onClick={() => navigate("/ideas?mode=personalize")}>
-          <span className="intent-icon fun"><SlidersHorizontal size={23} /></span>
-          <span><strong>Personalize a customer order</strong><small>Repeatable workflows with editable inputs</small></span>
-          <ChevronRight size={18} />
-        </button>
-        <button onClick={() => navigate("/ideas?mode=gift")}>
-          <span className="intent-icon easy"><Gift size={23} /></span>
-          <span><strong>Make for someone or a moment</strong><small>Personal gifts and everyday creative projects</small></span>
+        <button onClick={() => navigate("/skills")}>
+          <span className="intent-icon fun"><WandSparkles size={23} /></span>
+          <span><strong>Explore Skills</strong><small>Reusable workflows for your own version</small></span>
           <ChevronRight size={18} />
         </button>
         <button onClick={() => navigate("/materials")}>
           <span className="intent-icon material"><Boxes size={23} /></span>
-          <span><strong>Explore how a material prints</strong><small>Preparation, fixtures, settings, and failures</small></span>
+          <span><strong>Explore Materials</strong><small>Tested preparation, fixtures, and print settings</small></span>
+          <ChevronRight size={18} />
+        </button>
+        <button onClick={() => navigate("/creators")}>
+          <span className="intent-icon easy"><Users size={23} /></span>
+          <span><strong>Explore Creators</strong><small>Styles, expertise, and verified work</small></span>
           <ChevronRight size={18} />
         </button>
       </section>
 
       <Section
-        eyebrow="Product opportunities"
-        title="Ideas worth a small real-world test"
-        description="Explore who the product may serve, how it can differ, what it may cost, and which real prints support the direction."
+        title="Product Opportunities"
+        description="Sellable directions and personalizable ideas, supported by real E1 prints."
         link="/ideas"
       >
         <div className="product-grid">
@@ -110,9 +104,8 @@ export default function HomePage() {
       </Section>
 
       <Section
-        eyebrow="Creative workflows"
-        title="Turn an input into your own solution"
-        description="Each Skill explains its inputs, transformation steps, editable fields, output, and usage rights."
+        title="Skills"
+        description="Reusable creative workflows that turn a proven idea into your own version."
         link="/skills"
       >
         <div className="skill-grid">
@@ -122,20 +115,19 @@ export default function HomePage() {
 
       <section className="editorial-banner">
         <div>
-          <p className="eyebrow">Local product opportunity</p>
-          <h2>Start with one place people recognize—not a generic souvenir range.</h2>
-          <p>Review the evidence, test one landmark in a small batch, then decide whether the idea deserves a larger collection.</p>
-          <button className="button button-light" onClick={() => navigate("/idea/city-magnet")}>
-            Explore the collection <ArrowRight size={17} />
+          <p className="eyebrow">Community challenge · Now open</p>
+          <h2>Local Icons Challenge</h2>
+          <p>Turn a landmark, food, symbol, or local story into something people can make—then print and share the verified result.</p>
+          <button className="button button-light" onClick={() => navigate("/campaigns")}>
+            View challenge <ArrowRight size={17} />
           </button>
         </div>
         <img src={productIdeas[1].image} alt="" />
       </section>
 
       <Section
-        eyebrow="Materials"
-        title="Start with what you want to print on"
-        description="Physical properties, preparation, fixtures, print settings, aftercare, known failures, and verified results."
+        title="Materials"
+        description="Tested substrates, preparation, fixtures, and print settings for reliable E1 results."
         link="/materials"
       >
         <div className="material-grid">
@@ -144,8 +136,7 @@ export default function HomePage() {
       </Section>
 
       <Section
-        eyebrow="Community projects"
-        title="Real prints, not just perfect renders"
+        title="Community Projects"
         description="Browse what E1 owners have actually made, tested, and shared."
         link="/projects"
       >
@@ -155,9 +146,8 @@ export default function HomePage() {
       </Section>
 
       <Section
-        eyebrow="Trusted contributors"
-        title="Follow the people behind the proof"
-        description="Evaluate creators by their verified prints, workflow contributions, material knowledge, rights, and point of view."
+        title="Trusted Contributors"
+        description="Follow creators whose verified work, creative methods, and material knowledge you can trust."
         link="/creators"
       >
         <div className="creator-grid">
