@@ -161,7 +161,9 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
 .product-card:hover, .skill-card:hover, .material-card:hover, .creator-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .card-image-wrap, .skill-visual, .material-image, .project-image { position: relative; overflow: hidden; background: #e8e7e1; }
 .card-image-wrap { aspect-ratio: 1 / .82; }
-.card-image-wrap img, .skill-visual img, .material-image img, .project-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+.card-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+.skill-visual img, .material-image img { width: 100%; height: 100%; object-fit: contain; transition: transform .45s ease; }
+.project-image img { width: 100%; height: auto; transition: transform .45s ease; }
 .product-card:hover img, .skill-card:hover img, .material-card:hover img, .project-card:hover img { transform: scale(1.035); }
 .card-badges { position: absolute; top: 12px; left: 12px; display: grid; justify-items: start; gap: 6px; }
 .asset-type-chip { display: inline-flex; align-items: center; gap: 5px; width: fit-content; padding: 6px 9px; border-radius: 999px; font-size: 9px; line-height: 1; font-weight: 800; letter-spacing: .02em; backdrop-filter: blur(10px); box-shadow: 0 4px 16px rgba(20,20,16,.08); }
@@ -192,15 +194,10 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
 .card-commerce svg { margin-left: auto; }
 
 .skill-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-.skill-visual { aspect-ratio: 1.15 / 1; }
-.skill-compare { display: grid; grid-template-columns: .82fr 1.18fr; width: 100%; height: 100%; }
-.skill-compare > div { position: relative; min-width: 0; overflow: hidden; }
-.skill-compare > div:first-child { border-right: 2px solid rgba(255,255,255,.9); }
-.skill-compare img { width: 100%; height: 100%; object-fit: cover; }
-.skill-compare > div > span { position: absolute; left: 9px; bottom: 9px; padding: 4px 7px; border-radius: 999px; color: #fff; background: rgba(20,24,22,.68); font-size: 8px; font-weight: 750; backdrop-filter: blur(8px); }
+.skill-visual { aspect-ratio: 4 / 3; background: #f0efe9; }
 .skill-stats { padding-top: 12px; border-top: 1px solid #e8e7e1; }
 .material-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-.material-image { aspect-ratio: 1.18 / 1; }
+.material-image { aspect-ratio: 4 / 3; background: #f0efe9; }
 .material-process-line { min-height: 47px; margin: 11px 0 0; padding: 10px 11px; border-radius: 10px; color: #587078; background: #eef6f7; font-size: 10px; line-height: 1.35; }
 .material-process-line strong { display: block; margin-bottom: 3px; color: #24505a; font-size: 8px; text-transform: uppercase; letter-spacing: .08em; }
 .material-meta { justify-content: space-between; }
@@ -216,10 +213,7 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
 
 .masonry-grid { columns: 4 230px; column-gap: 18px; }
 .project-card { display: inline-block; width: 100%; break-inside: avoid; margin-bottom: 25px; }
-.project-image { border-radius: 16px; aspect-ratio: var(--ratio, auto); min-height: 220px; }
-.project-card:nth-child(3n+1) .project-image { height: 380px; }
-.project-card:nth-child(3n+2) .project-image { height: 290px; }
-.project-card:nth-child(3n) .project-image { height: 330px; }
+.project-image { border-radius: 16px; min-height: 0; background: #f0efe9; }
 .project-overlay { position: absolute; inset: 11px 11px auto; display: flex; align-items: center; justify-content: space-between; }
 .project-overlay .save-button { position: static; }
 .project-status-stack { display: grid; justify-items: start; gap: 5px; }
@@ -317,7 +311,7 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
 .idea-test-brief .button-large { width: 100%; }
 .product-detail-hero, .skill-detail-hero, .material-detail-hero { display: grid; grid-template-columns: 1.08fr .92fr; gap: 5vw; align-items: center; min-height: 650px; }
 .detail-image-panel, .material-detail-image { height: 650px; overflow: hidden; border-radius: var(--radius-lg); position: relative; background: #ddd; }
-.detail-image-panel img, .material-detail-image img { width: 100%; height: 100%; object-fit: cover; }
+.detail-image-panel img, .material-detail-image img { width: 100%; height: 100%; object-fit: contain; }
 .image-status-row { display: flex; flex-wrap: wrap; gap: 7px; }
 .detail-image-panel .image-status-row { position: absolute; left: 18px; top: 18px; }
 .detail-summary h1, .project-detail-info h1 { font-size: clamp(40px, 4.5vw, 68px); line-height: 1.02; letter-spacing: -.06em; margin-bottom: 20px; }
@@ -352,11 +346,22 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
 .use-case-list small { color: var(--muted); font-size: 10px; }
 .detail-projects { columns: 3 230px; }
 
-.before-after { display: grid; grid-template-columns: 1fr 50px 1fr; align-items: center; min-height: 520px; }
-.before-after > div:not(.transform-arrow) { height: 460px; position: relative; border-radius: 24px; overflow: hidden; }
-.before-after img { width: 100%; height: 100%; object-fit: cover; }
-.before-after span { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 6px 9px; border-radius: 7px; background: rgba(255,255,255,.85); font-size: 9px; font-weight: 700; }
-.transform-arrow { display: grid; place-items: center; color: var(--purple); }
+.skill-detail-image {
+  min-height: 520px;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #f4f2ee;
+}
+.skill-detail-image img {
+  display: block;
+  width: 100%;
+  max-height: 560px;
+  object-fit: contain;
+  border-radius: 18px;
+}
 .skill-big-stats { margin: 24px 0; }
 .skill-big-stats strong { font-size: 23px; }
 .skill-how { padding: 65px 5vw; background: #1d4034; color: #fff; border-radius: var(--radius-lg); }
@@ -391,8 +396,8 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
 .material-evidence .failure-list > span { color: #6e4938; }
 
 .project-detail-layout { display: grid; grid-template-columns: 1.12fr .88fr; gap: 5vw; align-items: start; }
-.project-detail-image { min-height: 760px; border-radius: var(--radius-lg); overflow: hidden; background: #ddd; }
-.project-detail-image img { width: 100%; height: 760px; object-fit: cover; }
+.project-detail-image { min-height: 620px; border-radius: var(--radius-lg); overflow: hidden; background: #e8e7e1; display: grid; place-items: center; }
+.project-detail-image img { width: 100%; height: auto; max-height: 760px; object-fit: contain; }
 .project-detail-info { position: sticky; top: 105px; padding: 15px 0; }
 .project-detail-info > .status-pill { margin-bottom: 8px; }
 .project-detail-info > h1 { min-height: 2.04em; display: flex; align-items: flex-end; }
@@ -538,8 +543,7 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
   .split-story, .comment-panel, .process-panel { grid-template-columns: 1fr; }
   .workflow-definition, .material-evidence { grid-template-columns: 1fr; }
   .contribution-notice { align-items: flex-start; flex-direction: column; }
-  .before-after { min-height: 430px; }
-  .before-after > div:not(.transform-arrow) { height: 360px; }
+  .skill-detail-image { min-height: 430px; }
   .project-detail-info { position: static; }
   .project-detail-image, .project-detail-image img { min-height: 0; height: 620px; }
   .creator-profile-main { margin-top: 10px; padding-left: 0; align-items: flex-start; }
@@ -580,9 +584,7 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
   .split-story, .skill-how, .process-panel, .comment-panel { padding: 40px 23px; }
   .step-grid { grid-template-columns: 1fr; }
   .step-grid article > span { margin-bottom: 20px; }
-  .before-after { grid-template-columns: 1fr; gap: 10px; }
-  .before-after > div:not(.transform-arrow) { height: 300px; }
-  .transform-arrow { transform: rotate(90deg); }
+  .skill-detail-image { min-height: 300px; padding: 12px; }
   .project-detail-image, .project-detail-image img { height: 480px; }
   .creator-profile-cover { height: 220px; }
   .creator-profile-main { display: block; }

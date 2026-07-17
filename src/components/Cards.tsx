@@ -80,16 +80,7 @@ export function SkillCard({ item }: { item: Skill }) {
   return (
     <Link to={`/skill/${item.id}`} className="skill-card">
       <div className="skill-visual">
-        <div className="skill-compare">
-          <div>
-            <img src={item.inputImage} alt={`${item.title} input`} />
-            <span>Input</span>
-          </div>
-          <div>
-            <img src={item.image} alt={`${item.title} result`} />
-            <span>Result</span>
-          </div>
-        </div>
+        <img src={item.image} alt={item.title} />
         <span className="asset-type-chip skill"><Workflow size={12} /> Skill workflow</span>
         <SaveButton light />
       </div>

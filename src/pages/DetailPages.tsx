@@ -191,10 +191,8 @@ export function SkillDetailPage() {
     <div className="detail-page page-container">
       <button className="back-link" onClick={() => navigate(-1)}><ArrowLeft size={16} /> Back to Skills</button>
       <section className="skill-detail-hero">
-        <div className="before-after">
-          <div><span>Input</span><img src={item.inputImage} alt="Input example" /></div>
-          <div className="transform-arrow"><WandSparkles size={28} /></div>
-          <div><span>Result</span><img src={item.image} alt="Result example" /></div>
+        <div className="skill-detail-image">
+          <img src={item.image} alt={`${item.title} output family`} />
         </div>
         <div className="detail-summary">
           <div className="image-status-row">{item.badges.map((badge) => <StatusPill key={badge} label={badge} />)}</div>
