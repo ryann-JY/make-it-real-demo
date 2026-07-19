@@ -9,10 +9,10 @@ type Kind = "ideas" | "skills" | "materials" | "projects" | "creators";
 
 const config: Record<Kind, { eyebrow: string; title: string; description: string; filters: string[] }> = {
   ideas: {
-    eyebrow: "Product ideas",
+    eyebrow: "Ideas",
     title: "What will you make next?",
-    description: "Browse complete product directions connected to real workflows, materials, and community proof.",
-    filters: ["For you", "Worth testing", "Personalizable", "Gifts & life", "Easy", "Verified evidence"],
+    description: "Browse curated themes that bring together inspiring projects, reusable Skills, and proven Substrates.",
+    filters: ["For you", "Made to sell", "Personalized", "Seasonal & occasions", "Local culture", "Verified projects"],
   },
   skills: {
     eyebrow: "Creative workflows",
@@ -21,10 +21,10 @@ const config: Record<Kind, { eyebrow: string; title: string; description: string
     filters: ["Featured", "Personalized", "Commercial use", "Verified", "Photo input", "Text & logo"],
   },
   materials: {
-    eyebrow: "Materials",
-    title: "Know the material before you print.",
+    eyebrow: "Substrates",
+    title: "Know the substrate before you print.",
     description: "Dimensions, preparation, fixtures, sourcing, tested processes, and everything makers have built with it.",
-    filters: ["All materials", "Acrylic", "Ceramic", "Flat", "Rotary", "Easy", "Verified workflow"],
+    filters: ["All substrates", "Acrylic", "Ceramic", "Flat", "Rotary", "Easy", "Verified workflow"],
   },
   projects: {
     eyebrow: "Community projects",
@@ -35,8 +35,8 @@ const config: Record<Kind, { eyebrow: string; title: string; description: string
   creators: {
     eyebrow: "Creator discovery",
     title: "Follow makers who know their craft.",
-    description: "Find creators by product specialty, visual style, material experience, and real-print track record.",
-    filters: ["Recommended", "Official creators", "Verified sellers", "Material experts", "Workflow creators"],
+    description: "Find creators by product specialty, visual style, substrate experience, and real-print track record.",
+    filters: ["Recommended", "Official creators", "Verified sellers", "Substrate experts", "Workflow creators"],
   },
 };
 
@@ -46,9 +46,9 @@ export default function CollectionPage({ kind }: { kind: Kind }) {
   const initialMode = params.get("mode");
   const publishType = params.get("publish");
   const initialFilter =
-    initialMode === "sell" ? "Worth testing" :
-    initialMode === "personalize" ? "Personalizable" :
-    initialMode === "gift" ? "Gifts & life" :
+    initialMode === "sell" ? "Made to sell" :
+    initialMode === "personalize" ? "Personalized" :
+    initialMode === "gift" ? "Seasonal & occasions" :
     data.filters[0];
   const [active, setActive] = useState(initialFilter);
   const [query, setQuery] = useState("");
@@ -68,11 +68,11 @@ export default function CollectionPage({ kind }: { kind: Kind }) {
       if (!queryMatch) return false;
       if (kind === "ideas") {
         const idea = item as ProductIdea;
-        if (active === "Worth testing") return idea.modes.includes("sell");
-        if (active === "Personalizable") return idea.modes.includes("personalize");
-        if (active === "Gifts & life") return idea.modes.includes("gift");
-        if (active === "Easy") return idea.difficulty === "Easy";
-        if (active === "Verified evidence") return idea.projectIds.some((id) => projects.find((project) => project.id === id)?.badge === "Verified Print");
+        if (active === "Made to sell") return idea.modes.includes("sell");
+        if (active === "Personalized") return idea.modes.includes("personalize");
+        if (active === "Seasonal & occasions") return idea.tags.some((tag) => /seasonal|wedding|event|gift/i.test(tag));
+        if (active === "Local culture") return idea.tags.some((tag) => /local|sports|club/i.test(tag));
+        if (active === "Verified projects") return idea.projectIds.some((id) => projects.find((project) => project.id === id)?.badge === "Verified Print");
       }
       if (kind === "skills") {
         const skill = item as Skill;
@@ -102,7 +102,7 @@ export default function CollectionPage({ kind }: { kind: Kind }) {
         const creator = item as Creator;
         if (active === "Official creators") return creator.roles.includes("Official Creator");
         if (active === "Verified sellers") return creator.roles.includes("Verified Seller");
-        if (active === "Material experts") return creator.roles.includes("Material Expert");
+        if (active === "Substrate experts") return creator.roles.includes("Substrate Expert");
         if (active === "Workflow creators") return creator.roles.includes("Workflow Creator");
       }
       return true;
@@ -134,12 +134,12 @@ export default function CollectionPage({ kind }: { kind: Kind }) {
         <section className="contribution-notice">
           <div>
             <p className="eyebrow">Contribution draft</p>
-            <h2>{publishType === "project" ? "Share evidence from a real print or AI concept" : publishType === "skill" ? "Document a reusable creative workflow" : "Document a material-specific IDF"}</h2>
+            <h2>{publishType === "project" ? "Share evidence from a real print or AI concept" : publishType === "skill" ? "Document a reusable creative workflow" : "Document a Substrate"}</h2>
             <p>
               {publishType === "project"
                 ? "A Verified Print requires a finished photo and an E1 completion record. AI work must remain clearly labeled."
                 : publishType === "skill"
-                ? "Define the required inputs, transformation steps, editable output, applicable materials, and reuse rights."
+                ? "Define the required inputs, transformation steps, editable output, applicable substrates, and reuse rights."
                 : "Include physical properties, preparation, positioning, print settings, aftercare, test results, and known failures."}
             </p>
           </div>

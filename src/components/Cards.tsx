@@ -1,9 +1,8 @@
 import {
-  ArrowUpRight,
   Boxes,
   Bookmark,
+  Check,
   CheckCircle2,
-  Clock3,
   Heart,
   Layers3,
   Printer,
@@ -43,32 +42,25 @@ export function SaveButton({ light = false }: { light?: boolean }) {
 }
 
 export function ProductCard({ item, featured = false }: { item: ProductIdea; featured?: boolean }) {
-  const verifiedCount = item.projectIds.filter((projectId) => {
-    return projects.find((project) => project.id === projectId)?.badge === "Verified Print";
-  }).length;
   return (
     <Link to={`/idea/${item.id}`} className={`product-card ${featured ? "featured" : ""}`}>
       <div className="card-image-wrap">
         <img src={item.image} alt={item.title} />
         <div className="card-badges">
-          <span className="asset-type-chip idea"><Sparkles size={12} /> Product idea</span>
-          <span className="evidence-pill"><CheckCircle2 size={13} /> {verifiedCount} real examples</span>
+          <span className="asset-type-chip idea"><Sparkles size={12} /> Idea</span>
         </div>
         <SaveButton light />
       </div>
       <div className="product-card-body">
-        <p className="card-kicker">{item.kicker}</p>
         <h3>{item.title}</h3>
-        <p className="card-audience">{item.audience}</p>
-        <div className="mini-metrics">
-          <span><Clock3 size={14} /> {item.time}</span>
-          <span>{item.difficulty}</span>
-          <span className="margin-text">{item.modes.includes("personalize") ? "Personalizable" : "Small-batch idea"}</span>
+        <p className="idea-card-summary">{item.description}</p>
+        <div className="idea-card-tags">
+          {item.tags.slice(0, 3).map((tag) => <span key={tag}>{tag}</span>)}
         </div>
-        <div className="card-commerce">
-          <span><small>Reference cost</small><strong>{item.cost}</strong></span>
-          <span><small>Reference price</small><strong>{item.price}</strong></span>
-          <ArrowUpRight size={18} />
+        <div className="idea-card-counts">
+          <span>{item.projectIds.length} Projects</span>
+          <span>{item.skillIds.length} {item.skillIds.length === 1 ? "Skill" : "Skills"}</span>
+          <span>{item.materialIds.length} Substrates</span>
         </div>
       </div>
     </Link>
@@ -102,7 +94,7 @@ export function MaterialCard({ item }: { item: Material }) {
     <Link to={`/material/${item.id}`} className="material-card">
       <div className="material-image">
         <img src={item.image} alt={item.title} />
-        <span className="asset-type-chip material"><Boxes size={12} /> Material + IDF</span>
+        <span className="asset-type-chip material"><Boxes size={12} /> Substrate</span>
         <SaveButton light />
       </div>
       <div className="material-card-body">
@@ -126,9 +118,9 @@ export function ProjectCard({ item }: { item: Project }) {
       <div className="project-image">
         <img src={item.image} alt={item.title} />
         <div className="project-overlay">
-          <span className="project-status-stack">
-            <span className="asset-type-chip project"><Printer size={12} /> Project</span>
-            <StatusPill label={item.badge} />
+          <span className={`asset-type-chip project ${item.badge === "Verified Print" ? "verified" : ""}`}>
+            {item.badge === "Verified Print" ? <Check size={12} strokeWidth={3} /> : <Printer size={12} />}
+            {item.badge === "Verified Print" ? "Project · Print verified" : "Project"}
           </span>
           <SaveButton light />
         </div>

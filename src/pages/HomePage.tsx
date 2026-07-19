@@ -33,7 +33,6 @@ export default function HomePage() {
     <div className="home-page">
       <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow"><WandSparkles size={15} /> Verified on E1 · Ready to personalize</p>
           <h1>Find a proven print. Make it uniquely yours.</h1>
           <form className="idea-search" onSubmit={submit}>
             <Sparkles size={22} />
@@ -42,7 +41,7 @@ export default function HomePage() {
               onChange={(event) => setQuery(event.target.value)}
               placeholder="What do you want to make?"
             />
-            <button type="submit">Find proven ideas <ArrowRight size={17} /></button>
+            <button type="submit">Start <ArrowRight size={17} /></button>
           </form>
           <div className="prompt-row">
             {prompts.map((prompt) => (
@@ -73,7 +72,7 @@ export default function HomePage() {
       <section className="intent-strip">
         <button onClick={() => navigate("/ideas")}>
           <span className="intent-icon sell"><Sparkles size={23} /></span>
-          <span><strong>Explore Product Ideas</strong><small>Sellable directions and personalizable inspiration</small></span>
+          <span><strong>Explore Ideas</strong><small>Sellable directions and personalizable inspiration</small></span>
           <ChevronRight size={18} />
         </button>
         <button onClick={() => navigate("/skills")}>
@@ -83,7 +82,7 @@ export default function HomePage() {
         </button>
         <button onClick={() => navigate("/materials")}>
           <span className="intent-icon material"><Boxes size={23} /></span>
-          <span><strong>Explore Materials</strong><small>Tested preparation, fixtures, and print settings</small></span>
+          <span><strong>Explore Substrates</strong><small>Tested preparation, fixtures, and print settings</small></span>
           <ChevronRight size={18} />
         </button>
         <button onClick={() => navigate("/creators")}>
@@ -94,8 +93,8 @@ export default function HomePage() {
       </section>
 
       <Section
-        title="Product Opportunities"
-        description="Sellable directions and personalizable ideas, supported by real E1 prints."
+        title="Ideas"
+        description="Sellable directions and personalizable ideas, supported by real prints."
         link="/ideas"
       >
         <div className="product-grid">
@@ -126,7 +125,7 @@ export default function HomePage() {
       </section>
 
       <Section
-        title="Materials"
+        title="Substrates"
         description="Tested substrates, preparation, fixtures, and print settings for reliable E1 results."
         link="/materials"
       >
@@ -147,7 +146,7 @@ export default function HomePage() {
 
       <Section
         title="Trusted Contributors"
-        description="Follow creators whose verified work, creative methods, and material knowledge you can trust."
+        description="Follow creators whose verified work, creative methods, and substrate knowledge you can trust."
         link="/creators"
       >
         <div className="creator-grid">
@@ -158,7 +157,7 @@ export default function HomePage() {
       <section className="home-search-footer">
         <Search size={30} />
         <h2>Still looking for the right idea?</h2>
-        <p>Search the full Make It Real community by product, occasion, material, style, or creator.</p>
+        <p>Search the full Make It Real community by product, occasion, substrate, style, or creator.</p>
         <button className="button button-dark" onClick={() => document.querySelector<HTMLInputElement>(".global-search input")?.focus()}>
           Search the community
         </button>

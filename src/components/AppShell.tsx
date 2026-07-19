@@ -19,14 +19,14 @@ import {
   Users,
   X,
 } from "lucide-react";
-import { ReactNode, useState } from "react";
+import { ReactNode, useLayoutEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const nav = [
   { to: "/", label: "Home", icon: Home },
-  { to: "/ideas", label: "Product Ideas", icon: Sparkles },
+  { to: "/ideas", label: "Ideas", icon: Sparkles },
   { to: "/skills", label: "Skills", icon: Layers3 },
-  { to: "/materials", label: "Materials", icon: Boxes },
+  { to: "/materials", label: "Substrates", icon: Boxes },
   { to: "/projects", label: "Projects", icon: Images },
   { to: "/creators", label: "Creators", icon: Users },
 ];
@@ -45,6 +45,20 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+
+  useLayoutEffect(() => {
+    const previousScrollRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+
+    return () => {
+      window.history.scrollRestoration = previousScrollRestoration;
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [location.pathname, location.search]);
 
   const submitSearch = (event: React.FormEvent) => {
     event.preventDefault();
@@ -145,7 +159,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search products, skills, materials, projects..."
+              placeholder="Search products, skills, substrates, projects..."
             />
             <kbd>⌘ K</kbd>
           </form>
@@ -153,7 +167,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <button className="button button-secondary" onClick={() => setPublishOpen(true)}>
               <Gem size={17} /> Publish
             </button>
-            <button className="icon-button notification-button" aria-label="Notifications" onClick={() => window.alert("You have 3 new saves and one material-test reply.")}>
+            <button className="icon-button notification-button" aria-label="Notifications" onClick={() => window.alert("You have 3 new saves and one substrate-test reply.")}>
               <Bell size={20} />
               <i />
             </button>
@@ -202,7 +216,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             </button>
             <p className="eyebrow">Contribute to Make It Real</p>
             <h2>What knowledge are you sharing?</h2>
-            <p>Product Ideas are assembled from community evidence. Contributors publish the reusable assets and real prints behind them.</p>
+            <p>Ideas are assembled from community evidence. Contributors publish the reusable assets and real prints behind them.</p>
             <div className="publish-options">
               <button onClick={() => { setPublishOpen(false); navigate("/projects?publish=project"); }}>
                 <Images size={21} /><span><strong>Share a Project</strong><small>Upload a real result or clearly labeled AI concept.</small></span><ChevronRight size={17} />
@@ -211,7 +225,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <Layers3 size={21} /><span><strong>Create a Skill</strong><small>Define inputs, workflow steps, editable output, and rights.</small></span><ChevronRight size={17} />
               </button>
               <button onClick={() => { setPublishOpen(false); navigate("/materials?publish=material"); }}>
-                <Boxes size={21} /><span><strong>Submit a Material / IDF</strong><small>Document preparation, fixture, settings, testing, and failures.</small></span><ChevronRight size={17} />
+                <Boxes size={21} /><span><strong>Submit a Substrate</strong><small>Document sourcing, preparation, fixture, settings, testing, and failures.</small></span><ChevronRight size={17} />
               </button>
             </div>
           </section>

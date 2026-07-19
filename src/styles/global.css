@@ -171,27 +171,25 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
 .asset-type-chip.skill { position: absolute; left: 11px; top: 11px; color: #3e277f; background: rgba(235,225,255,.94); }
 .asset-type-chip.material { position: absolute; left: 11px; top: 11px; color: #174c58; background: rgba(218,244,247,.94); }
 .asset-type-chip.project { color: #fff; background: rgba(24,31,27,.76); }
+.asset-type-chip.project.verified { background: rgba(35,111,69,.94); }
 .asset-type-chip.creator { position: absolute; left: 11px; top: 11px; color: #18382b; background: rgba(224,255,220,.93); }
 .status-pill { display: inline-flex; align-items: center; gap: 5px; width: fit-content; padding: 5px 8px; border-radius: 999px; font-size: 9px; font-weight: 750; backdrop-filter: blur(9px); }
 .status-pill.verified { color: #17442c; background: rgba(222,255,221,.9); }
 .status-pill.concept { color: #4d348e; background: rgba(235,225,255,.92); }
 .status-pill.commercial { color: #654215; background: rgba(255,239,203,.92); }
-.evidence-pill { display: inline-flex; align-items: center; gap: 5px; padding: 6px 9px; border-radius: 999px; color: #17442c; background: rgba(222,255,221,.92); font-size: 9px; font-weight: 750; backdrop-filter: blur(9px); }
 .save-button { position: absolute; right: 11px; top: 11px; width: 34px; height: 34px; border: 0; border-radius: 50%; display: grid; place-items: center; background: #fff; cursor: pointer; }
 .save-button.light { background: rgba(255,255,255,.82); backdrop-filter: blur(10px); }
 .save-button.saved { color: #5a3ed1; }
 .product-card-body, .skill-card-body, .material-card-body { padding: 17px; }
 .card-kicker { margin-bottom: 7px; color: #85847b; text-transform: uppercase; letter-spacing: .08em; font-size: 9px; font-weight: 750; }
 .product-card h3, .skill-card h3, .material-card h3, .project-card h3 { font-size: 16px; line-height: 1.3; letter-spacing: -.025em; margin-bottom: 7px; }
-.card-audience, .skill-card-body > p:not(.card-kicker) { color: var(--muted); font-size: 12px; line-height: 1.45; min-height: 34px; }
-.mini-metrics, .skill-stats, .material-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 7px 11px; color: #77766e; font-size: 10px; margin-top: 14px; }
-.mini-metrics span, .skill-stats span { display: flex; align-items: center; gap: 4px; }
-.mini-metrics .margin-text { color: #21613f; font-weight: 700; }
-.card-commerce { display: flex; align-items: flex-end; gap: 18px; border-top: 1px solid #e8e7e1; margin-top: 15px; padding-top: 13px; }
-.card-commerce span { display: grid; gap: 2px; }
-.card-commerce small { color: #99988f; font-size: 9px; }
-.card-commerce strong { font-size: 12px; }
-.card-commerce svg { margin-left: auto; }
+.skill-card-body > p:not(.card-kicker) { color: var(--muted); font-size: 12px; line-height: 1.45; min-height: 34px; }
+.idea-card-summary { min-height: 36px; display: -webkit-box; overflow: hidden; color: var(--muted); font-size: 11px; line-height: 1.55; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.idea-card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 13px; }
+.idea-card-tags span { padding: 5px 7px; border-radius: 999px; color: #5c4a1e; background: #f5efd8; font-size: 8px; font-weight: 700; }
+.idea-card-counts { display: flex; flex-wrap: wrap; gap: 5px 12px; margin-top: 14px; padding-top: 12px; border-top: 1px solid #e8e7e1; color: #85847b; font-size: 9px; }
+.skill-stats, .material-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 7px 11px; color: #77766e; font-size: 10px; margin-top: 14px; }
+.skill-stats span { display: flex; align-items: center; gap: 4px; }
 
 .skill-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
 .skill-visual { aspect-ratio: 4 / 3; background: #f0efe9; }
@@ -216,7 +214,6 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
 .project-image { border-radius: 16px; min-height: 0; background: #f0efe9; }
 .project-overlay { position: absolute; inset: 11px 11px auto; display: flex; align-items: center; justify-content: space-between; }
 .project-overlay .save-button { position: static; }
-.project-status-stack { display: grid; justify-items: start; gap: 5px; }
 .project-card > h3 { margin: 12px 2px 8px; }
 .project-footer { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 10px; }
 .project-footer > span { display: flex; align-items: center; gap: 4px; }
@@ -258,7 +255,7 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
 .product-idea-copy h1 { max-width: 800px; font-size: clamp(52px, 6vw, 92px); line-height: .96; letter-spacing: -.067em; margin-bottom: 25px; }
 .product-idea-lead { max-width: 720px; color: var(--muted); font-size: 17px; line-height: 1.65; }
 .product-idea-tags { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 25px 0; }
-.product-idea-tags > span:first-child { padding: 7px 10px; border-radius: 8px; background: #e8e7e1; color: #5b5a53; font-size: 10px; }
+.product-idea-tags > span { padding: 7px 10px; border-radius: 999px; background: #e8e7e1; color: #5b5a53; font-size: 10px; font-weight: 700; }
 .product-idea-proof { display: grid; grid-template-columns: repeat(4, 1fr); margin: 27px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .product-idea-proof > span { display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; padding: 18px 8px 18px 0; }
 .product-idea-proof svg { grid-row: span 2; color: var(--green); }
@@ -271,8 +268,10 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
 .product-idea-cover strong { font-size: 12px; line-height: 1.45; }
 .opportunity-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 30px 0 115px; }
 .opportunity-summary article { min-height: 230px; padding: 25px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
-.opportunity-summary article > svg { margin-bottom: 45px; color: var(--green); }
-.opportunity-summary article > strong { display: block; color: #45453f; font-size: 14px; line-height: 1.65; }
+.opportunity-summary article > svg { margin-bottom: 30px; color: var(--green); }
+.idea-overview-list { display: grid; gap: 10px; margin-top: 18px; }
+.idea-overview-list span { display: flex; align-items: flex-start; gap: 8px; color: #45453f; font-size: 12px; line-height: 1.45; }
+.idea-overview-list span::before { content: ""; width: 5px; height: 5px; flex: 0 0 auto; margin-top: 6px; border-radius: 50%; background: var(--green); }
 .product-idea-evidence { scroll-margin-top: 90px; }
 .idea-contributors { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; margin-top: 28px; padding: 17px; border-radius: 16px; background: #ebeae4; }
 .idea-contributors > .eyebrow { width: 100%; margin: 0 0 3px; }
@@ -295,20 +294,6 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
 .idea-path-list small { color: var(--muted); font-size: 8px; text-transform: uppercase; letter-spacing: .07em; }
 .idea-path-list strong { font-size: 12px; }
 .idea-path-list em { overflow: hidden; color: var(--muted); font-size: 9px; font-style: normal; text-overflow: ellipsis; white-space: nowrap; }
-.idea-test-brief { display: grid; grid-template-columns: .78fr 1.22fr; gap: 7vw; margin: 115px 0; padding: 65px 5vw; border-radius: var(--radius-lg); background: #1d4034; color: #fff; }
-.idea-test-heading h2 { font-size: clamp(34px, 3.5vw, 52px); line-height: 1.05; letter-spacing: -.05em; }
-.idea-test-heading .eyebrow { color: #9dd4bf; }
-.idea-test-heading > p:last-child { color: #c5d6cf; font-size: 11px; line-height: 1.65; }
-.idea-reference-metrics { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255,255,255,.2); border-bottom: 1px solid rgba(255,255,255,.2); }
-.idea-reference-metrics span { display: grid; gap: 6px; padding: 18px 10px 18px 0; }
-.idea-reference-metrics small { color: #a8c6ba; font-size: 8px; text-transform: uppercase; letter-spacing: .07em; }
-.idea-reference-metrics strong { font-size: 17px; }
-.idea-test-notes { display: grid; gap: 4px; margin: 22px 0; }
-.idea-test-notes > span { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,.15); }
-.idea-test-notes svg { grid-row: span 2; color: var(--acid); }
-.idea-test-notes strong { font-size: 12px; }
-.idea-test-notes small { color: #c5d6cf; font-size: 10px; line-height: 1.5; }
-.idea-test-brief .button-large { width: 100%; }
 .product-detail-hero, .skill-detail-hero, .material-detail-hero { display: grid; grid-template-columns: 1.08fr .92fr; gap: 5vw; align-items: center; min-height: 650px; }
 .detail-image-panel, .material-detail-image { height: 650px; overflow: hidden; border-radius: var(--radius-lg); position: relative; background: #ddd; }
 .detail-image-panel img, .material-detail-image img { width: 100%; height: 100%; object-fit: contain; }
@@ -535,7 +520,7 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
   .collection-tools { top: 62px; }
   .collection-search { display: none; }
   .product-detail-hero, .skill-detail-hero, .material-detail-hero, .project-detail-layout { grid-template-columns: 1fr; min-height: auto; }
-  .product-idea-hero, .idea-test-brief { grid-template-columns: 1fr; }
+  .product-idea-hero { grid-template-columns: 1fr; }
   .product-idea-cover { height: 520px; }
   .opportunity-summary, .idea-path-columns { grid-template-columns: 1fr; }
   .detail-image-panel, .material-detail-image { height: 520px; }
@@ -576,7 +561,7 @@ h1, h2, h3, .brand { font-family: "Avenir Next", Inter, ui-sans-serif, sans-seri
   .detail-image-panel, .material-detail-image { height: 410px; }
   .product-idea-copy h1 { font-size: 50px; }
   .product-idea-cover { height: 410px; border-radius: 40px 18px 40px 18px; }
-  .product-idea-proof, .idea-reference-metrics { grid-template-columns: repeat(2, 1fr); }
+  .product-idea-proof { grid-template-columns: repeat(2, 1fr); }
   .detail-summary h1, .project-detail-info h1 { font-size: 42px; }
   .business-metrics, .detail-facts, .skill-big-stats { grid-template-columns: repeat(3, 1fr); }
   .business-metrics strong { font-size: 15px; }

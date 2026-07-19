@@ -48,15 +48,15 @@ export default function CreatorPage() {
           <span><strong>{creator.verifiedPrints}</strong><small>Verified prints</small></span>
           <span><strong>{creator.reuseCount}</strong><small>Workflow reuses</small></span>
           <span><strong>{creatorSkills.length}</strong><small>Workflows shared</small></span>
-          <span><strong>{creatorMaterials.length}</strong><small>Materials tested</small></span>
+          <span><strong>{creatorMaterials.length}</strong><small>Substrates tested</small></span>
         </div>
       </section>
 
-      <FilterBar items={["Projects", "Skills", "Materials tested", "Collections"]} active={tab} onChange={setTab} />
+      <FilterBar items={["Projects", "Skills", "Substrates tested", "Collections"]} active={tab} onChange={setTab} />
       <div className="profile-tab-content">
         {tab === "Projects" && <div className="masonry-grid">{creatorProjects.map((item) => item && <ProjectCard key={item.id} item={item} />)}</div>}
         {tab === "Skills" && <div className="skill-grid">{creatorSkills.length ? creatorSkills.map((item) => item && <SkillCard key={item.id} item={item} />) : <EmptyProfile text="This maker hasn’t published a Skill yet." />}</div>}
-        {tab === "Materials tested" && <div className="material-grid">{creatorMaterials.map((item) => item && <MaterialCard key={item.id} item={item} />)}</div>}
+        {tab === "Substrates tested" && <div className="material-grid">{creatorMaterials.map((item) => item && <MaterialCard key={item.id} item={item} />)}</div>}
         {tab === "Collections" && <EmptyProfile text="Saved product collections will appear here." action={() => navigate("/ideas")} />}
       </div>
     </div>
@@ -67,7 +67,7 @@ function EmptyProfile({ text, action }: { text: string; action?: () => void }) {
   return (
     <div className="empty-state">
       <h3>{text}</h3>
-      {action && <button className="button button-secondary" onClick={action}>Explore product ideas</button>}
+      {action && <button className="button button-secondary" onClick={action}>Explore ideas</button>}
     </div>
   );
 }

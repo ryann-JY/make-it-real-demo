@@ -30,13 +30,13 @@ export function CampaignsPage() {
 export function AcademyPage() {
   return (
     <div className="page-container">
-      <PageHeader eyebrow="Academy" title="Learn the part that makes the print work." description="Short, practical guides for product decisions, materials, setup, and repeatable production." />
+      <PageHeader eyebrow="Academy" title="Learn the part that makes the print work." description="Short, practical guides for product decisions, substrates, setup, and repeatable production." />
       <div className="academy-feature">
         <img src={academy[0].image} alt="" />
         <div>
           <p className="eyebrow">Featured path · 24 min</p>
           <h2>Start a product line with your E1</h2>
-          <p>Choose a focused product, validate the material, make the first sellable version, and build a repeatable process.</p>
+          <p>Choose a focused product, validate the substrate, make the first sellable version, and build a repeatable process.</p>
           <button className="button button-light" onClick={() => window.alert("Learning path saved to your community workspace.")}>Start learning <ArrowRight size={17} /></button>
         </div>
       </div>
@@ -55,8 +55,8 @@ export function AcademyPage() {
 export function SavedPage() {
   return (
     <div className="page-container">
-      <PageHeader eyebrow="Your community" title="Saved for later" description="A lightweight collection of ideas, Skills, materials, and projects you may want to revisit." />
-      <Section title="Product ideas"><div className="product-grid">{productIdeas.slice(0, 2).map((item) => <ProductCard key={item.id} item={item} />)}</div></Section>
+      <PageHeader eyebrow="Your community" title="Saved for later" description="A lightweight collection of ideas, Skills, substrates, and projects you may want to revisit." />
+      <Section title="Ideas"><div className="product-grid">{productIdeas.slice(0, 2).map((item) => <ProductCard key={item.id} item={item} />)}</div></Section>
       <Section title="Projects"><div className="masonry-grid detail-projects">{projects.slice(3, 7).map((item) => <ProjectCard key={item.id} item={item} />)}</div></Section>
     </div>
   );
@@ -91,14 +91,14 @@ export function SearchPage() {
 
   return (
     <div className="page-container">
-      <PageHeader eyebrow="Search results" title={`Results for “${query}”`} description={`${count} results across product ideas, Skills, materials, projects, and creators.`} />
+      <PageHeader eyebrow="Search results" title={`Results for “${query}”`} description={`${count} results across ideas, Skills, substrates, projects, and creators.`} />
       {count === 0 ? (
-        <div className="empty-search"><Search size={36} /><h2>No exact match yet</h2><p>Try a broader product, material, occasion, or style.</p><Link className="button button-dark" to="/ideas">Browse product ideas</Link></div>
+        <div className="empty-search"><Search size={36} /><h2>No exact match yet</h2><p>Try a broader product, substrate, occasion, or style.</p><Link className="button button-dark" to="/ideas">Browse ideas</Link></div>
       ) : (
         <>
-          {matches.ideas.length > 0 && <Section title="Product ideas"><div className="product-grid">{matches.ideas.map((item) => <ProductCard key={item.id} item={item} />)}</div></Section>}
+          {matches.ideas.length > 0 && <Section title="Ideas"><div className="product-grid">{matches.ideas.map((item) => <ProductCard key={item.id} item={item} />)}</div></Section>}
           {matches.skills.length > 0 && <Section title="Skills"><div className="skill-grid">{matches.skills.map((item) => <SkillCard key={item.id} item={item} />)}</div></Section>}
-          {matches.materials.length > 0 && <Section title="Materials & IDF"><div className="material-grid">{matches.materials.map((item) => <MaterialCard key={item.id} item={item} />)}</div></Section>}
+          {matches.materials.length > 0 && <Section title="Substrates"><div className="material-grid">{matches.materials.map((item) => <MaterialCard key={item.id} item={item} />)}</div></Section>}
           {matches.projects.length > 0 && <Section title="Projects"><div className="masonry-grid detail-projects">{matches.projects.map((item) => <ProjectCard key={item.id} item={item} />)}</div></Section>}
           {matches.creators.length > 0 && <Section title="Creators"><div className="creator-grid">{matches.creators.map((item) => <CreatorCard key={item.id} item={item} />)}</div></Section>}
         </>

@@ -1,8 +1,6 @@
 import {
   ArrowLeft,
   ArrowRight,
-  AlertTriangle,
-  BadgeDollarSign,
   Boxes,
   Check,
   ChevronRight,
@@ -37,76 +35,77 @@ import { useStudioPrompt } from "../components/AppShell";
 export function ProductIdeaPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const openStudio = useStudioPrompt();
   const item = findById(productIdeas, id) ?? productIdeas[0];
   const relatedSkills = item.skillIds.map((skillId) => findById(skills, skillId)).filter(Boolean);
   const relatedMaterials = item.materialIds.map((materialId) => findById(materials, materialId)).filter(Boolean);
   const related = item.projectIds.map((projectId) => findById(projects, projectId)).filter(Boolean);
-  const verified = related.filter((project) => project?.badge === "Verified Print");
   const relatedCreators = creators.filter((creator) => related.some((project) => project?.creatorId === creator.id));
 
   return (
     <div className="product-idea-page page-container">
-      <button className="back-link" onClick={() => navigate(-1)}><ArrowLeft size={16} /> Back to product ideas</button>
+      <button className="back-link" onClick={() => navigate(-1)}><ArrowLeft size={16} /> Back to ideas</button>
       <section className="product-idea-hero">
         <div className="product-idea-copy">
-          <p className="eyebrow">Product Idea · curated opportunity guide</p>
+          <p className="eyebrow">Idea · curated collection</p>
           <h1>{item.title}</h1>
           <p className="product-idea-lead">{item.description}</p>
           <div className="product-idea-tags">
-            <span>{item.audience}</span>
-            {item.badges.includes("Commercial Use") && <StatusPill label="Commercial Use" />}
+            {item.tags.map((tag) => <span key={tag}>{tag}</span>)}
           </div>
           <div className="product-idea-proof">
-            <span><Printer size={19} /><strong>{verified.length}</strong><small>verified projects</small></span>
+            <span><Printer size={19} /><strong>{related.length}</strong><small>projects</small></span>
             <span><Sparkles size={19} /><strong>{relatedSkills.length}</strong><small>creative workflows</small></span>
-            <span><Boxes size={19} /><strong>{relatedMaterials.length}</strong><small>tested materials</small></span>
+            <span><Boxes size={19} /><strong>{relatedMaterials.length}</strong><small>substrates</small></span>
             <span><Users size={19} /><strong>{relatedCreators.length}</strong><small>contributors</small></span>
           </div>
           <button className="button button-dark" onClick={() => document.querySelector(".product-idea-evidence")?.scrollIntoView({ behavior: "smooth" })}>
-            {verified.length ? "See the real evidence" : "Review the current concept"} <ArrowRight size={17} />
+            Explore ways to make it <ArrowRight size={17} />
           </button>
         </div>
         <div className="product-idea-cover">
           <img src={item.image} alt={item.title} />
           <div>
-            <small>What a Product Idea does</small>
-            <strong>Groups multiple real outcomes and possible ways to make them.</strong>
+            <small>Inside this Idea</small>
+            <strong>Projects for inspiration, Skills for creative direction, and Substrates for printing.</strong>
           </div>
         </div>
       </section>
 
       <section className="opportunity-summary">
         <article>
-          <Users size={22} />
-          <p className="eyebrow">Who it may serve</p>
-          <strong>{item.customer}</strong>
-        </article>
-        <article>
           <ShoppingBag size={22} />
-          <p className="eyebrow">Why they may choose it</p>
-          <strong>{item.valueReason}</strong>
+          <p className="eyebrow">Typical products</p>
+          <div className="idea-overview-list">
+            {item.typicalProducts.map((product) => <span key={product}>{product}</span>)}
+          </div>
         </article>
         <article>
           <Layers3 size={22} />
-          <p className="eyebrow">Where your version can differ</p>
-          <strong>{item.differentiation}</strong>
+          <p className="eyebrow">Ways to personalize</p>
+          <div className="idea-overview-list">
+            {item.personalizationIdeas.map((option) => <span key={option}>{option}</span>)}
+          </div>
+        </article>
+        <article>
+          <Users size={22} />
+          <p className="eyebrow">Best for</p>
+          <div className="idea-overview-list">
+            {item.bestFor.map((use) => <span key={use}>{use}</span>)}
+          </div>
         </article>
       </section>
 
       <Section
         className="product-idea-evidence"
-        eyebrow={verified.length ? "Real-world proof" : "Validation status"}
-        title={verified.length ? "See what has actually been made" : "This direction still needs a verified print"}
-        description={verified.length
-          ? "Projects provide the evidence. Compare real finishes, creative directions, materials, and the people who tested them."
-          : "The related Project is still an AI Concept. Use it to understand the direction, but not as proof that the process or result has been validated."}
+        eyebrow="Projects in this Idea"
+        title="See how makers have explored this theme"
+        description="Browse finished prints and early explorations, then open a Project to understand its workflow, Substrate, and verification status."
       >
         <div className="masonry-grid detail-projects">
           {related.map((project) => project && <ProjectCard key={project.id} item={project} />)}
         </div>
         <div className="idea-contributors">
-          <span className="eyebrow">People behind the evidence</span>
+          <span className="eyebrow">Creators in this collection</span>
           {relatedCreators.map((creator) => (
             <Link key={creator.id} to={`/creator/${creator.id}`}>
               <img src={creator.avatar} alt="" />
@@ -118,9 +117,9 @@ export function ProductIdeaPage() {
       </Section>
 
       <Section
-        eyebrow="Possible paths"
-        title="Choose how you want to make your version"
-        description="The Idea does not prescribe one recipe. Compare reusable creative workflows and material-specific print processes."
+        eyebrow="Ways to make it"
+        title="Choose a Skill or Substrate to go deeper"
+        description="An Idea is a starting point, not a single recipe. Open a Skill for the creative workflow or a Substrate for sourcing and print preparation."
       >
         <div className="idea-path-columns">
           <article>
@@ -134,7 +133,7 @@ export function ProductIdeaPage() {
             </div>
           </article>
           <article>
-            <header><Boxes size={21} /><span><strong>Materials & IDF</strong><small>Understand how each format prints successfully</small></span></header>
+            <header><Boxes size={21} /><span><strong>Substrates</strong><small>Understand how each format prints successfully</small></span></header>
             <div className="idea-path-list">
               {relatedMaterials.map((material) => material && <Link key={material.id} to={`/material/${material.id}`}>
                 <img src={material.image} alt="" />
@@ -146,30 +145,7 @@ export function ProductIdeaPage() {
         </div>
       </Section>
 
-      <section className="idea-test-brief">
-        <div className="idea-test-heading">
-          <p className="eyebrow">Before you commit</p>
-          <h2>Use the numbers as a test brief—not a promise.</h2>
-          <p>{item.estimateNote}</p>
-        </div>
-        <div>
-          <div className="idea-reference-metrics">
-            <span><small>Reference cost</small><strong>{item.cost}</strong></span>
-            <span><small>Reference price</small><strong>{item.price}</strong></span>
-            <span><small>Directional margin</small><strong>{item.margin}</strong></span>
-            <span><small>Typical print time</small><strong>{item.time}</strong></span>
-          </div>
-          <div className="idea-test-notes">
-            <span><BadgeDollarSign size={19} /><strong>Suggested first test</strong><small>{item.testPlan}</small></span>
-            <span><AlertTriangle size={19} /><strong>What remains uncertain</strong><small>{item.risk}</small></span>
-          </div>
-          <button className="button button-primary button-large" onClick={openStudio}>
-            <WandSparkles size={19} /> Choose a path and continue in Studio
-          </button>
-        </div>
-      </section>
-
-      <Section title="You may also want to make" link="/ideas">
+      <Section title="Explore related Ideas" link="/ideas">
         <div className="product-grid">
           {productIdeas.filter((other) => other.id !== item.id).slice(0, 3).map((other) => <ProductCard key={other.id} item={other} />)}
         </div>
@@ -235,7 +211,7 @@ export function SkillDetailPage() {
       <Section title="Real projects using this Skill">
         <div className="masonry-grid detail-projects">{relatedProjects.map((project) => project && <ProjectCard key={project.id} item={project} />)}</div>
       </Section>
-      <Section title="Recommended materials">
+      <Section title="Recommended substrates">
         <div className="material-grid">{relatedMaterials.map((material) => material && <MaterialCard key={material.id} item={material} />)}</div>
       </Section>
     </div>
@@ -250,7 +226,7 @@ export function MaterialDetailPage() {
 
   return (
     <div className="detail-page page-container">
-      <button className="back-link" onClick={() => navigate(-1)}><ArrowLeft size={16} /> Back to Materials</button>
+      <button className="back-link" onClick={() => navigate(-1)}><ArrowLeft size={16} /> Back to Substrates</button>
       <section className="material-detail-hero">
         <div className="material-detail-image"><img src={item.image} alt={item.title} /></div>
         <div className="detail-summary">
@@ -273,7 +249,7 @@ export function MaterialDetailPage() {
       </section>
 
       <section className="process-panel">
-        <div className="process-heading"><p className="eyebrow">Material-specific IDF</p><h2>How this exact material is prepared, positioned, printed, and finished.</h2></div>
+        <div className="process-heading"><p className="eyebrow">Substrate print process</p><h2>How this exact substrate is prepared, positioned, printed, and finished.</h2></div>
         <div className="process-steps">
           <article><span>Before printing</span><strong>{item.prep}</strong></article>
           <article><span>Positioning & fixture</span><strong>{item.fixture}</strong></article>
@@ -296,7 +272,7 @@ export function MaterialDetailPage() {
       <Section title={`What makers created with this ${item.title}`}>
         <div className="masonry-grid detail-projects">{related.map((project) => project && <ProjectCard key={project.id} item={project} />)}</div>
       </Section>
-      <Section title="Similar materials" link="/materials">
+      <Section title="Similar substrates" link="/materials">
         <div className="material-grid">{materials.filter((other) => other.id !== item.id).slice(0, 3).map((other) => <MaterialCard key={other.id} item={other} />)}</div>
       </Section>
     </div>
@@ -321,7 +297,7 @@ export function ProjectDetailPage() {
       <section className="project-detail-layout">
         <div className="project-detail-image"><img src={item.image} alt={item.title} /></div>
         <div className="project-detail-info">
-          <StatusPill label={item.badge} />
+          {item.badge === "Verified Print" && <StatusPill label="Verified Print" />}
           <h1>{item.title}</h1>
           <Link to={`/creator/${creator.id}`} className="project-author">
             <img src={creator.avatar} alt="" /><span><strong>{creator.name}</strong><small>{creator.verified}</small></span><ChevronRight size={16} />
@@ -335,16 +311,16 @@ export function ProjectDetailPage() {
           <div className="made-with">
             <p className="eyebrow">Evidence & relationships</p>
             {relatedIdeas[0] ? (
-              <Link to={`/idea/${relatedIdeas[0].id}`}><ShoppingBag size={19} /><span><small>Product idea</small><strong>{relatedIdeas[0].title}</strong></span><ChevronRight size={16} /></Link>
+              <Link to={`/idea/${relatedIdeas[0].id}`}><ShoppingBag size={19} /><span><small>Idea</small><strong>{relatedIdeas[0].title}</strong></span><ChevronRight size={16} /></Link>
             ) : (
-              <div className="relationship-empty"><ShoppingBag size={19} /><span><small>Product idea</small><strong>Independent project · not grouped into a product idea</strong></span></div>
+              <div className="relationship-empty"><ShoppingBag size={19} /><span><small>Idea</small><strong>Independent project · not grouped into an Idea</strong></span></div>
             )}
             {skill ? (
               <Link to={`/skill/${skill.id}`}><Sparkles size={19} /><span><small>Skill</small><strong>{skill.title}</strong></span><ChevronRight size={16} /></Link>
             ) : (
               <div className="relationship-empty"><Sparkles size={19} /><span><small>Skill</small><strong>Original creation · no reusable Skill linked</strong></span></div>
             )}
-            <Link to={`/material/${material.id}`}><Boxes size={19} /><span><small>Material & IDF</small><strong>{material.title}</strong></span><ChevronRight size={16} /></Link>
+            <Link to={`/material/${material.id}`}><Boxes size={19} /><span><small>Substrate</small><strong>{material.title}</strong></span><ChevronRight size={16} /></Link>
             <div><Printer size={19} /><span><small>{item.badge === "Verified Print" ? "Device completion record" : "Print status"}</small><strong>{item.completionRecord ?? "No completed device record yet"}</strong></span></div>
             <div><PackageCheck size={19} /><span><small>Actual setup</small><strong>{item.device} · {item.time} · {item.ink} ink · {item.parameters}</strong></span></div>
             <div><ShieldCheck size={19} /><span><small>Reuse rights</small><strong>{item.license}</strong></span></div>
